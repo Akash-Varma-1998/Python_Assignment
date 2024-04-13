@@ -11,7 +11,36 @@
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css"
     />
-    <link rel="stylesheet" type="text/css" href="{% static 'css/blogs_css/index.css' %}">
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="{% static 'css/blogs_css/index.css' %}"
+    />
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="{% static 'css/blogs_css/footer.css' %}"
+    />
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="{% static 'css/blogs_css/sidebar.css' %}"
+    />
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="{% static 'css/blogs_css/button_glow.css' %}"
+    />
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="{% static 'css/blogs_css/login.css' %}"
+    />
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="{% static 'css/blogs_css/dashboard.css' %}"
+    />
   </head>
   <body>
     <!-- Header -->
@@ -19,95 +48,211 @@
       <nav>
         <div class="menu">
           <div class="logo">
-            <a href="{% url 'index' %}">Blogs Star</a>
+            <a href="{% url 'home' %}">Blogs Star</a>
           </div>
           <ul>
-            <li><a href="#">Home</a></li>
-            <li><a href="#">About</a></li>
-            <li><a href="#">Services</a></li>
-            <li><a href="#">Contact</a></li>
-            <li><a href="#">Feedback</a></li>
+            <div class="buttons">
+              {% if user.is_authenticated %}
+              <a href="{% url 'logout' %}">
+                <button>Logout</button>
+              </a>
+              {% else %}
+              <a href="{% url 'login' %}">
+                <button>Login</button>
+              </a>
+              {% endif %}
+            </div>
           </ul>
         </div>
       </nav>
     </header>
-    
+
+    <!-- Sidebar -->
+    <!-- <div class="sidebar">
+      <div class="logo-details">
+        <i class="bx bxl-c-plus-plus icon"></i>
+        <div class="logo_name">CodingLab</div>
+        <i class="bx bx-menu" id="btn"></i>
+      </div>
+      <ul class="nav-list">
+        <li>
+          <i class="bx bx-search"></i>
+          <input type="text" placeholder="Search..." />
+          <span class="tooltip">Search</span>
+        </li>
+        <li>
+          <a href="#">
+            <i class="bx bx-grid-alt"></i>
+            <span class="links_name">Dashboard</span>
+          </a>
+          <span class="tooltip">Dashboard</span>
+        </li>
+        <li>
+          <a href="#">
+            <i class="bx bx-user"></i>
+            <span class="links_name">User</span>
+          </a>
+          <span class="tooltip">User</span>
+        </li>
+        <li>
+          <a href="#">
+            <i class="bx bx-chat"></i>
+            <span class="links_name">Messages</span>
+          </a>
+          <span class="tooltip">Messages</span>
+        </li>
+        <li>
+          <a href="#">
+            <i class="bx bx-pie-chart-alt-2"></i>
+            <span class="links_name">Analytics</span>
+          </a>
+          <span class="tooltip">Analytics</span>
+        </li>
+        <li>
+          <a href="#">
+            <i class="bx bx-folder"></i>
+            <span class="links_name">File Manager</span>
+          </a>
+          <span class="tooltip">Files</span>
+        </li>
+        <li>
+          <a href="#">
+            <i class="bx bx-cart-alt"></i>
+            <span class="links_name">Order</span>
+          </a>
+          <span class="tooltip">Order</span>
+        </li>
+        <li>
+          <a href="#">
+            <i class="bx bx-heart"></i>
+            <span class="links_name">Saved</span>
+          </a>
+          <span class="tooltip">Saved</span>
+        </li>
+        <li>
+          <a href="#">
+            <i class="bx bx-cog"></i>
+            <span class="links_name">Setting</span>
+          </a>
+          <span class="tooltip">Setting</span>
+        </li>
+        <li class="profile">
+          <div class="profile-details">
+            <img src="profile.jpg" alt="profileImg" />
+            <div class="name_job">
+              <div class="name">Prem Shahi</div>
+              <div class="job">Web designer</div>
+            </div>
+          </div>
+          <i class="bx bx-log-out" id="log_out"></i>
+        </li>
+      </ul>
+    </div> -->
+
     <main class="container">
-        {% block content %} 
-        <!-- All Code In Here -->
-        {% endblock %}
+      {% block content %}
+      <!-- All Code In Here -->
+      {% endblock %}
     </main>
 
-    <div class="img"></div>
-    <div class="center">
-      <div class="title">Create Amazing Website</div>
-      <div class="sub_title">Pure HTML & CSS Only</div>
-      <div class="btns">
-        <button>Learn More</button>
-        <button>Subscribe</button>
-      </div>
-    </div>
     <!-- Footer -->
     <footer>
-        <div class="content">
-          <div class="top">
-            <div class="logo-details">
-              <i class="fab fa-slack"></i>
-              <span class="logo_name">CodingLab</span>
-            </div>
-            <div class="media-icons">
-              <a href="#"><i class="fab fa-facebook-f"></i></a>
-              <a href="#"><i class="fab fa-twitter"></i></a>
-              <a href="#"><i class="fab fa-instagram"></i></a>
-              <a href="#"><i class="fab fa-linkedin-in"></i></a>
-              <a href="#"><i class="fab fa-youtube"></i></a>
-            </div>
+      <div class="content">
+        <div class="top">
+          <div class="logo-details">
+            <i class="fab fa-slack"></i>
+            <span class="logo_name">Blogs Star</span>
           </div>
-          <div class="link-boxes">
-            <ul class="box">
-              <li class="link_name">Company</li>
-              <li><a href="#">Home</a></li>
-              <li><a href="#">Contact us</a></li>
-              <li><a href="#">About us</a></li>
-              <li><a href="#">Get started</a></li>
-            </ul>
-            <ul class="box">
-              <li class="link_name">Services</li>
-              <li><a href="#">App design</a></li>
-              <li><a href="#">Web design</a></li>
-              <li><a href="#">Logo design</a></li>
-              <li><a href="#">Banner design</a></li>
-            </ul>
-            <ul class="box">
-              <li class="link_name">Account</li>
-              <li><a href="#">Profile</a></li>
-              <li><a href="#">My account</a></li>
-              <li><a href="#">Prefrences</a></li>
-              <li><a href="#">Purchase</a></li>
-            </ul>
-            <ul class="box">
-              <li class="link_name">Courses</li>
-              <li><a href="#">HTML & CSS</a></li>
-              <li><a href="#">JavaScript</a></li>
-              <li><a href="#">Photography</a></li>
-              <li><a href="#">Photoshop</a></li>
-            </ul>
-            <ul class="box input-box">
-              <li class="link_name">Subscribe</li>
-              <li><input type="text" placeholder="Enter your email"></li>
-              <li><input type="button" value="Subscribe"></li>
-            </ul>
+          <div class="media-icons">
+            <a href="#"><i class="fab fa-facebook-f"></i></a>
+            <a href="#"><i class="fab fa-twitter"></i></a>
+            <a href="#"><i class="fab fa-instagram"></i></a>
+            <a href="#"><i class="fab fa-linkedin-in"></i></a>
+            <a href="#"><i class="fab fa-youtube"></i></a>
           </div>
         </div>
-        <div class="bottom-details">
-          <div class="bottom_text">
-            <span class="copyright_text">Copyright © 2021 <a href="#">CodingLab.</a>All rights reserved</span>
-            <span class="policy_terms">
-              <a href="#">Privacy policy</a>
-              <a href="#">Terms & condition</a>
-            </span>
-          </div>
+        <!-- <div class="link-boxes">
+          <ul class="box">
+            <li class="link_name">Company</li>
+            <li><a href="#">Home</a></li>
+            <li><a href="#">Contact us</a></li>
+            <li><a href="#">About us</a></li>
+            <li><a href="#">Get started</a></li>
+          </ul>
+          <ul class="box">
+            <li class="link_name">Services</li>
+            <li><a href="#">App design</a></li>
+            <li><a href="#">Web design</a></li>
+            <li><a href="#">Logo design</a></li>
+            <li><a href="#">Banner design</a></li>
+          </ul>
+          <ul class="box">
+            <li class="link_name">Account</li>
+            <li><a href="#">Profile</a></li>
+            <li><a href="#">My account</a></li>
+            <li><a href="#">Prefrences</a></li>
+            <li><a href="#">Purchase</a></li>
+          </ul>
+          <ul class="box">
+            <li class="link_name">Courses</li>
+            <li><a href="#">HTML & CSS</a></li>
+            <li><a href="#">JavaScript</a></li>
+            <li><a href="#">Photography</a></li>
+            <li><a href="#">Photoshop</a></li>
+          </ul>
+          <ul class="box input-box">
+            <li class="link_name">Subscribe</li>
+            <li><input type="text" placeholder="Enter your email" /></li>
+            <li><input type="button" value="Subscribe" /></li>
+          </ul>
+        </div> -->
+      </div>
+      <div class="bottom-details">
+        <div class="bottom_text">
+          <span class="copyright_text"
+            >Copyright © 2024 <a href="{% url 'home' %}">Blogs Star.</a>All
+            rights reserved</span
+          >
+          <span class="policy_terms">
+            <a href="#">Privacy policy</a>
+            <a href="#">Terms & condition</a>
+          </span>
         </div>
-      </footer>
+      </div>
+    </footer>
+
+    <!-- <script>
+      let sidebar = document.querySelector(".sidebar");
+      let closeBtn = document.querySelector("#btn");
+      let searchBtn = document.querySelector(".bx-search");
+      closeBtn.addEventListener("click", () => {
+        sidebar.classList.toggle("open");
+        menuBtnChange();
+      });
+      searchBtn.addEventListener("click", () => {
+        sidebar.classList.toggle("open");
+        menuBtnChange();
+      });
+      function menuBtnChange() {
+        if (sidebar.classList.contains("open")) {
+          closeBtn.classList.replace("bx-menu", "bx-menu-alt-right"); //replacing the iocns class
+        } else {
+          closeBtn.classList.replace("bx-menu-alt-right", "bx-menu"); //replacing the iocns class
+        }
+      }
+    </script> -->
+    <script>
+      // For login and signup
+      const wrapper = document.querySelector(".wrapper"),
+        signupHeader = document.querySelector(".signup header"),
+        loginHeader = document.querySelector(".login header");
+      loginHeader.addEventListener("click", () => {
+        wrapper.classList.add("active");
+      });
+      signupHeader.addEventListener("click", () => {
+        wrapper.classList.remove("active");
+      });
+      // For signup validation
+    </script>
   </body>
 </html>
