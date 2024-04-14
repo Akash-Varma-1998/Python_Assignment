@@ -1,0 +1,263 @@
+{% extends 'index.html' %} {% block content %}
+<div class="dashboard">
+  <div class="d-flex justify-content-between align-items-center mb-4">
+    <a
+      href=""
+      data-bs-toggle="modal"
+      data-bs-target="#exampleModal"
+      class="btn btn-primary px-5 py-2 btn-sm"
+      >Add Blog</a
+    >
+    <div>
+      <form action="{% url 'myblogs' %}" method="post" class="d-flex">
+        {% csrf_token %}
+        <input
+          type="search"
+          value="{{query}}"
+          name="searchquery"
+          class="form-control"
+          placeholder="Search.."
+        />
+        <button class="btn btn-success mx-2" name="search">Search</button>
+      </form>
+    </div>
+  </div>
+  <div class="dashboard-blog-block">
+    <div class="container">
+      <div class="card-wrap-block">
+        <div class="row">
+          {% for blog in blogs %}
+          <div class="col-lg-4 mb-4">
+            <div class="card">
+              <div class="card__header">
+                <img
+                  src="{{ blog.image.url }}"
+                  alt="card__image"
+                  class="card__image"
+                />
+              </div>
+              <div class="card__body">
+                <h4>{{ blog.title }}</h4>
+                <p>{{ blog.content }}</p>
+              </div>
+              <div class="card__footer">
+                <div class="user">
+                  <!-- <img src="{{ blog.added_by.profile_picture.url }}" alt="user__image" class="user__image"/> -->
+                  <div class="user__info">
+                    <h5>{{ blog.added_by.username }}</h5>
+                    <small>{{ blog.publication_date }}</small>
+                  </div>
+                </div>
+              </div>
+              <div class="d-flex">
+                <form
+                  action="{% url 'delete_blog' blog.id %}"
+                  method="post"
+                  style="
+                    margin-bottom: 15px;
+                    margin-right: 20px;
+                    margin-left: 10px;
+                  "
+                >
+                  {% csrf_token %}
+                  <button type="submit" class="btn btn-danger">Delete</button>
+                </form>
+                <button
+                  type="button"
+                  class="btn btn-primary"
+                  data-bs-toggle="modal"
+                  data-bs-target="#editModal{{ blog.id }}"
+                >
+                  Edit
+                </button>
+              </div>
+            </div>
+          </div>
+          <!-- Edit modal corresponding to each blog -->
+          <div
+            class="modal fade"
+            id="editModal{{ blog.id }}"
+            tabindex="-1"
+            aria-labelledby="editModal{{ blog.id }}Label"
+            aria-hidden="true"
+          >
+            <div class="modal-dialog">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title" id="editModal{{ blog.id }}Label">
+                    Edit Blog
+                  </h5>
+                  <button
+                    type="button"
+                    class="btn-close"
+                    data-bs-dismiss="modal"
+                    aria-label="Close"
+                  ></button>
+                </div>
+                <div class="modal-body">
+                  <!-- Form to edit blog data -->
+                  <form action="{% url 'edit_blog' blog.id %}" method="post" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    <input type="hidden" name="blog_id" value="{{ blog.id }}" />
+                    <!-- Title -->
+                    <div class="mb-3">
+                      <label for="editTitle" class="form-label">Title</label>
+                      <input
+                        type="text"
+                        class="form-control"
+                        id="editTitle"
+                        name="title"
+                        value="{{ blog.title }}"
+                      />
+                    </div>
+                    <!-- Content -->
+                    <div class="mb-3">
+                      <label for="editContent" class="form-label"
+                        >Content</label
+                      >
+                      <textarea
+                        class="form-control"
+                        id="editContent"
+                        name="content"
+                        rows="3"
+                      >
+{{ blog.content }}</textarea
+                      >
+                    </div>
+                    <!-- Image -->
+                    <div class="mb-3">
+                      <label for="editImage" class="form-label">Image</label>
+                      <input
+                        type="file"
+                        class="form-control"
+                        id="editImage"
+                        name="image"
+                        onchange="displayFileName(this)"
+                      />
+                      <small id="fileHelp" class="form-text text-muted"
+                        >Choose a new image file if you want to update the
+                        image.</small
+                      >
+                    </div>
+                    <button type="submit" class="btn btn-primary">
+                      Save Changes
+                    </button>
+                  </form>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {% endfor %}
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal -->
+<div
+  class="modal fade"
+  id="exampleModal"
+  tabindex="-1"
+  aria-labelledby="exampleModalLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h6 class="modal-title fs-5" id="exampleModalLabel">Add Blog</h6>
+      </div>
+      <div class="modal-body">
+        <form id="addBlogForm" method="post" enctype="multipart/form-data">
+          {% csrf_token %}
+          <div class="mb-3">
+            <label for="title" class="form-label">Title</label>
+            <input
+              type="text"
+              class="form-control"
+              id="title"
+              name="title"
+              required
+            />
+          </div>
+          <div class="mb-3">
+            <label for="content" class="form-label">Content</label>
+            <textarea
+              class="form-control"
+              id="content"
+              name="content"
+              rows="3"
+              required
+            ></textarea>
+          </div>
+          <div class="mb-3">
+            <label for="image" class="form-label">Image</label>
+            <input type="file" class="form-control" id="image" name="image" />
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <a type="button" class="btn btn-secondary" data-bs-dismiss="modal"
+          >Close</a
+        >
+        <button type="button" class="btn btn-primary" id="submitBtn">
+          Add Blog
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+{% if blogs.has_other_pages %}
+<div class="pagination">
+  <span class="step-links">
+    {% if blogs.has_previous %}
+    <a href="?page=1">&laquo; first</a>
+    <a href="?page={{ blogs.previous_page_number }}">previous</a>
+    {% endif %}
+
+    <span class="current">
+      Page {{ blogs.number }} of {{ blogs.paginator.num_pages }}.
+    </span>
+
+    {% if blogs.has_next %}
+    <a href="?page={{ blogs.next_page_number }}">next</a>
+    <a href="?page={{ blogs.paginator.num_pages }}">last &raquo;</a>
+    {% endif %}
+  </span>
+</div>
+{% endif %}
+
+<script>
+  document.getElementById("submitBtn").addEventListener("click", function () {
+    let form = document.getElementById("addBlogForm");
+    let formData = new FormData(form);
+
+    fetch("/add-blog/", {
+      method: "POST",
+      body: formData,
+      headers: {
+        "X-CSRFToken": "{{ csrf_token }}",
+      },
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        if (data.success) {
+          console.log(data);
+          alert("Blog added successfully!");
+          $("#exampleModal").modal("hide");
+          location.reload();
+        } else {
+          console.error("Error adding blog:", data.error);
+          $("#exampleModal").modal("hide");
+        }
+      })
+      .catch((error) => {
+        console.error("Error:", error);
+        alert("Error adding blog. Please try again.");
+      });
+  });
+</script>
+
+
+{% endblock %}

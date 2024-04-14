@@ -1,0 +1,141 @@
+{% extends 'index.html' %} {% block content %}
+<section class="wrapper login-wrapper">
+  <div class="form-block">
+    <div class="form signup">
+      <div class="form-title mb-3">Signup</div>
+          <!-- Display messages -->
+          {% if messages %}
+          <div class="messages">
+            {% for message in messages %}
+            <div class="alert alert-{{ message.tags }}" style="color: yellow;">
+              {{ message }}
+            </div>
+            {% endfor %}
+          </div>
+          {% endif %}
+      <form id="signupForm" action="{% url 'register' %}" method="post">
+        {% csrf_token %}
+        <div class="row">
+          <div class="col-lg-6 mb-3">
+            <div class="form-field">
+              <input
+                type="text"
+                id="fullname"
+                placeholder="Full name"
+                name="fullname"
+                value="{{ form.fullname.value }}"
+              />
+              <span id="fullNameError" class="error-message"></span>
+            </div>
+          </div>
+          <div class="col-lg-6 mb-3">
+            <div class="form-field">
+              <input
+                type="text"
+                id="email"
+                placeholder="Email address"
+                name="email"
+                value="{{ form.email.value }}"
+              />
+              <span id="emailError" class="error-message"></span>
+            </div>
+          </div>
+          <div class="col-lg-6 mb-3">
+            <div class="form-field">
+              <input
+                type="password"
+                id="password"
+                placeholder="Password"
+                name="password1"
+                value="{{ form.password1.value }}"
+              />
+              <span id="passwordError" class="error-message"></span>
+            </div>
+          </div>
+          <div class="col-lg-6 mb-3">
+            <div class="form-field">
+              <input
+                type="password"
+                id="confirmPassword"
+                placeholder="Confirm Password"
+                name="password2"
+                value="{{ form.password2.value }}"
+              />
+              <span id="confirmPasswordError" class="error-message"></span>
+            </div>
+          </div>
+        </div>
+        <!-- <div class="checkbox">
+          <input type="checkbox" id="signupCheck" />
+          <label for="signupCheck">I accept all terms & conditions</label>
+        </div> -->
+        <button type="submit" value="Signup">Submit</button>
+      </form>
+    </div>
+  </div>
+
+  <script>
+    document
+      .getElementById("signupForm")
+      .addEventListener("submit", function (event) {
+        event.preventDefault(); // Prevent form submission for now
+        validateForm();
+      });
+
+    function validateForm() {
+      var fullName = document.getElementById("fullname").value;
+      var email = document.getElementById("email").value;
+      var password = document.getElementById("password").value;
+      var confirmPassword = document.getElementById("confirmPassword").value;
+
+      document.getElementById("fullNameError").textContent = "";
+      document.getElementById("emailError").textContent = "";
+      document.getElementById("passwordError").textContent = "";
+      document.getElementById("confirmPasswordError").textContent = "";
+
+      var hasError = false;
+      var specialChars = /[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]+/;
+      if (fullName.trim() === "") {
+        document.getElementById("fullNameError").textContent =
+          "Please enter your full name.";
+        hasError = true;
+      }
+      if (specialChars.test(fullName)) {
+        document.getElementById("fullNameError").textContent =
+          "Name cannot contain special characters.";
+        hasError = true;
+      }
+      if (email.trim() === "") {
+        document.getElementById("emailError").textContent =
+          "Please enter your email address.";
+        hasError = true;
+      }
+      if (email.toUpperCase() === email) {
+        document.getElementById("emailError").textContent =
+          "Email cannot be all uppercase.";
+        hasError = true;
+      }
+      if (email.length <= 15) {
+        document.getElementById("emailError").textContent =
+          "Email should be more than 15 characters.";
+        hasError = true;
+      }
+      if (password.length < 8 || password.length > 30) {
+        document.getElementById("passwordError").textContent =
+          "Password should be between 8 and 30 characters.";
+        hasError = true;
+      }
+      if (password !== confirmPassword) {
+        document.getElementById("confirmPasswordError").textContent =
+          "Passwords do not match.";
+        hasError = true;
+      }
+
+      if (!hasError) {
+        document.getElementById("signupForm").submit();
+      }
+    }
+
+  </script>
+</section>
+{% endblock %}

@@ -1,0 +1,9 @@
+.profile{
+    margin-top: 8%;
+}
+
+.profile-box {
+    background-color: cadetblue;
+    padding: 20px 30px 30px;
+    border-radius: 8px;
+}

@@ -19,7 +19,7 @@ body {
   }
   
   
-  footer::before{
+  /* footer::before{
     content: '';
     position: absolute;
     left: 0;
@@ -27,7 +27,7 @@ body {
     height: 1px;
     width: 100%;
     background: #AFAFB6;
-  }
+  } */
   footer .content{
     max-width: 1250px;
     margin: auto;

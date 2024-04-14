@@ -1,0 +1,32 @@
+{% extends 'index.html' %}
+{% load static %}
+{% block content %}
+<div class="profile">
+
+<div class="profile-container">
+    <div class="profile-box">
+        <h1 class="form-title text-left mb-3">Profile</h1>
+        <form method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            <div class="row">
+                <div class="col-lg-6">
+                    <div class="field-block">
+                        <label for="username">Username:</label>
+                        <input type="text" id="username" name="username" value="{{ user.username }}" />
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="field-block">
+                        <label for="email">Email:</label>
+                        <input type="email" id="email" name="email" value="{{ user.email }}" />
+                    </div>
+                </div>
+            </div>
+            <!-- <label for="avatar">Profile Picture:</label>
+            <input type="file" id="avatar" name="avatar"> -->
+            <!-- <button type="submit" name="update">Update</button> -->
+        </form>
+    </div>
+</div>
+</div>
+{% endblock %}

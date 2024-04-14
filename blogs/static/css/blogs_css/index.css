@@ -118,4 +118,78 @@ nav .menu{
   color: black;
 }
 
-/* Button */
+.profile-container {
+  position: relative;
+  display: inline-block;
+}
+
+.profile-icon {
+  width: 40px; /* Adjust size as needed */
+  height: 40px; /* Adjust size as needed */
+  border-radius: 50%;
+  overflow: hidden;
+  background-color: #ccc; /* Placeholder background color */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+}
+
+.dropdown-menu {
+  display: none; /* Hide the dropdown menu by default */
+  position: absolute;
+  top: 100%;
+  right: 0;
+  min-width: 120px; /* Adjust width as needed */
+  background-color: #fff;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+  border-radius: 5px;
+  z-index: 1;
+  padding: 0 !important;
+  a {
+    text-decoration: none;
+    font-size: 14px;
+    &:hover {
+      text-decoration: none;
+    }
+  }
+}
+
+.profile-container:hover .dropdown-menu {
+  display: block; /* Show the dropdown menu on hover */
+  float: none;
+  left: -100px;
+}
+
+.dropdown-item {
+  padding: 10px !important;
+  text-align: center !important;
+  cursor: pointer;
+}
+
+.dropdown-item:hover {
+  background-color: #f1f1f1; /* Hover background color */
+}
+
+form {
+  input {
+    width: 100%;
+    border-radius: 4px;
+    padding: 8px;
+    font-size: 14px;
+    border: none;
+    outline: none;
+    border: 1px solid #e1e1e1;
+  }
+  label {
+    font-size: 14px;
+    color: #000000;
+  }
+}
+
+.form-title {
+  font-size: 22px;
+  font-weight: 600;
+  text-align: center;
+  color: #1b1b1b;
+}
