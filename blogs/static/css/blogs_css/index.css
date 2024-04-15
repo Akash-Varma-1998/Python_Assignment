@@ -121,6 +121,12 @@ nav .menu{
 .profile-container {
   position: relative;
   display: inline-block;
+
+  i.fas.fa-user {
+    color: white;
+}
+
+
 }
 
 .profile-icon {
@@ -136,7 +142,7 @@ nav .menu{
 }
 
 .dropdown-menu {
-  display: none; /* Hide the dropdown menu by default */
+  display: block;  
   position: absolute;
   top: 100%;
   right: 0;
@@ -151,6 +157,7 @@ nav .menu{
     font-size: 14px;
     &:hover {
       text-decoration: none;
+    
     }
   }
 }

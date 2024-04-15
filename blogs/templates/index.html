@@ -17,6 +17,11 @@
       href="{% static 'css/blogs_css/index.css' %}"
     />
     <link
+    rel="stylesheet"
+    type="text/css"
+    href="{% static 'css/blogs_css/index.css' %}"
+  />
+    <link
       rel="stylesheet"
       type="text/css"
       href="{% static 'css/blogs_css/footer.css' %}"
@@ -63,10 +68,10 @@
               <a href="{% url 'logout' %}">
                 <button>Logout</button>
               </a>
-              <div class="profile-container">
+              <div class="profile-container" style="position: relative;
+              display: inline-block;">
                 <div class="profile-icon">
-                  <!-- You can place an image or icon here -->
-                  <i class="fas fa-user"></i>
+                   <i class="fas fa-user" style="color: white;"></i>
                 </div>
                 <div class="dropdown-menu">
                   <a href="{% url 'profile' %}" class="dropdown-item">
@@ -179,7 +184,7 @@
     </main>
 
     <!-- Footer -->
-    <footer>
+    <footer class="position-static">
       <div class="content">
         <div class="top">
           <div class="logo-details">
